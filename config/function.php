@@ -53,14 +53,12 @@ function generateUserSecret($username)
     global $link;
 
     $username = escape($username);
-    // $password = escape($password);
 
     $query = "SELECT * FROM login WHERE username = '$username'";
     $result = mysqli_query($link, $query);
     $data = mysqli_fetch_assoc($result);
 
     if ($data) {
-        // if ($data['password'] == $password) {
         if ($data['secret'] == '') {
             $secret = $g->generateSecret();
             $query2 = "UPDATE login SET secret='$secret' WHERE username='$username'";
@@ -70,9 +68,6 @@ function generateUserSecret($username)
             $data = mysqli_fetch_assoc($result);
         }
         return $data;
-        // } else {
-        //     return false;
-        // }
     } else {
         return false;
     }
@@ -81,7 +76,6 @@ function generateUserSecret($username)
 
 function checkUserData($name, $pass)
 {
-    $g = new GoogleAuthenticator();
     global $link;
 
     $name = escape($name);
@@ -92,20 +86,7 @@ function checkUserData($name, $pass)
     $data = mysqli_fetch_assoc($result);
 
     if ($data) {
-        if ($data['password'] == $password) {
-            // if ($data['secret'] == '') {
-            //     $secret = $g->generateSecret();
-            //     $query2 = "UPDATE login SET secret='$secret' WHERE username='$name'";
-            //     mysqli_query($link, $query2);
-
-            //     $result = mysqli_query($link, $query);
-            //     $data = mysqli_fetch_assoc($result);
-            // }
-
-            return $data;
-        } else {
-            return false;
-        }
+        return $data;
     } else {
         return false;
     }
