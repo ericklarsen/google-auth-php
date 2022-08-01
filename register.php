@@ -21,7 +21,6 @@ if (isset($obj['username']) && isset($obj['password'])) {
             echo json_encode('failed');
         }
     } else {
-        // user telah ada
         $response["error"] = true;
         $response["error_msg"] = "username already exists.";
         echo json_encode('username already exists');
